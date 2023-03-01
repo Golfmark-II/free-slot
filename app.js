@@ -11,14 +11,14 @@
     function init(firstInit = true, groups = 1, duration = 1) {
       for (const door of doors) {
         if (firstInit) {
-          door.dataset.spinned = '0';
+          door.dataset.spinned = '3';
         } else if (door.dataset.spinned === '2') {
           return;
         }
   
         const boxes = door.querySelector('.boxes');
         const boxesClone = boxes.cloneNode(false);
-        const pool = [''];
+        const pool = ['./img/gem1.png'];
   
         if (!firstInit) {
           const arr = [];
@@ -26,28 +26,6 @@
             arr.push(...items);
           }
           pool.push(...shuffle(arr));
-  
-          boxesClone.addEventListener(
-            'transitionstart',
-            function () {
-              door.dataset.spinned = '1';
-              this.querySelectorAll('.box').forEach((box) => {
-                box.style.filter = 'blur(1px)';
-              });
-            },
-            { once: true }
-          );
-  
-          boxesClone.addEventListener(
-            'transitionend',
-            function () {
-              this.querySelectorAll('.box').forEach((box, index) => {
-                box.style.filter = 'blur(0)';
-                if (index > 0) this.removeChild(box);
-              });
-            },
-            { once: true }
-          );
         }
   
         for (let i = pool.length - 1; i >= 0; i--) {

@@ -1,9 +1,9 @@
 (function () {
     const items = [
-      '🍭',
-      '❌',
-      '⛄️',
-    ];
+        './img/gem1.png',
+        './img/gem2.png',
+        './img/gem3.png',
+      ];
     const doors = document.querySelectorAll('.door');
     
     document.querySelector('.btn').addEventListener('click', spin);
@@ -51,13 +51,17 @@
         }
   
         for (let i = pool.length - 1; i >= 0; i--) {
-          const box = document.createElement('div');
-          box.classList.add('box');
-          box.style.width = door.clientWidth + 'px';
-          box.style.height = door.clientHeight + 'px';
-          box.textContent = pool[i];
-          boxesClone.appendChild(box);
-        }
+            const box = document.createElement('img');
+      
+            box.classList.add('box');
+   
+            box.width = door.clientWidth + 'px';
+            
+            box.setAttribute("width", door.clientWidth)
+            box.setAttribute("height", door.clientHeight)
+            box.setAttribute("src", pool[i])
+            boxesClone.appendChild(box);
+          }
         boxesClone.style.transitionDuration = `${duration > 0 ? duration : 1}s`;
         boxesClone.style.transform = `translateY(-${door.clientHeight * (pool.length - 1)}px)`;
         door.replaceChild(boxesClone, boxes);
